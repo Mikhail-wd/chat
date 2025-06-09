@@ -1,12 +1,5 @@
 {
-    "name": "online-chat-server",
-    "version": "1.0.0",
-    "main": "index.js",
-    "type": "module",
     "scripts": {
         "start": "node index.js"
-    },
-    "dependencies": {
-        "node": "^18.0"
     }
 }
