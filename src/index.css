@@ -1,0 +1,73 @@
+@font-face {
+  font-family: Pixelbit;
+  src: url("../src/fonts/8bit/Nineteend2b5.woff");
+}
+
+#root {
+  width: 100%;
+}
+
+:root {
+  overflow-x: hidden;
+  font-family: Pixelbit, system-ui, sans-serif;
+  font-weight: 400;
+  --black-400: #333333;
+  --black-500: #242424;
+  --gray-500: #5a5a5a;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+div,
+span,
+a,
+input {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  border: 1px solid white;
+  outline: none;
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+body {
+  width: 100%;
+  letter-spacing: 0px;
+  font-size: 10px;
+  color: white;
+  background-color: var(--black-500);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+@media screen and (max-width:400px) {
+  body {
+    font-size: 8px;
+  }
+}
