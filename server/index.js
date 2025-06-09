@@ -78,7 +78,7 @@ const server = Server.createServer((req, res) => {
             res.end()
         })
     }
-    else if (reqUrl === "/chat-api/get-messages") {
+     else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
@@ -95,7 +95,7 @@ const server = Server.createServer((req, res) => {
         res.write(JSON.stringify(messages))
         res.end()
     }
-    else if (reqImag[1] === "assets") {
+     else if (reqImag[1] === "assets") {
         console.log("Assets loading")
         file.readFile(`../dist${req.url}`, (err, data) => {
             if (req.url.endsWith('.html')) {
@@ -178,7 +178,7 @@ const server = Server.createServer((req, res) => {
             }
         })
     }
-    else if (reqUrl === "/chat-api/message") {
+     else if (reqUrl === "/chat-api/message") {
         req.on('data', (data) => {
             EventEmitter.emit("add_message", JSON.parse(data))
         }
