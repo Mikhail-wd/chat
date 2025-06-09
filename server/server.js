@@ -3,7 +3,7 @@ import file from "fs"
 
 import eventEmitter from "events"
 
-const port = 390
+const port = 391
 
 let messages = [
     { name: "TestUser", message: "Oh shit this is working", user_color: "#fff", image_link: null }
@@ -58,9 +58,9 @@ EventEmitter.on("check_message_lenght", function (value) {
     let tempArray = []
     if (value.length >= 500) {
         tempArray = value.slice(0, 500)
+        console.log("messages is sliced and equale : " + tempArray.length)
+        messages = tempArray
     }
-    console.log("messages is sliced and equale : " + tempArray.length)
-    messages = tempArray
 })
 
 
@@ -77,14 +77,15 @@ const server = Server.createServer((req, res) => {
             res.write(data)
             res.end()
         })
-    } else if (reqUrl === "/chat-api/get-messages") {
+    }
+    else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
             'Access-Control-Allow-Origin': '*',
             "Cache-Control": "no-cache",
         });
-        EventEmitter.emit("check_message_lenght",messages)
+        EventEmitter.emit("check_message_lenght", messages)
         EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
@@ -93,7 +94,8 @@ const server = Server.createServer((req, res) => {
         });
         res.write(JSON.stringify(messages))
         res.end()
-    } else if (reqImag[1] === "assets") {
+    }
+    else if (reqImag[1] === "assets") {
         console.log("Assets loading")
         file.readFile(`../dist${req.url}`, (err, data) => {
             if (req.url.endsWith('.html')) {
@@ -175,13 +177,14 @@ const server = Server.createServer((req, res) => {
                 return
             }
         })
-    } else if (reqUrl === "/chat-api/message") {
+    }
+    else if (reqUrl === "/chat-api/message") {
         req.on('data', (data) => {
             EventEmitter.emit("add_message", JSON.parse(data))
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:5173",
+            "Access-Control-Allow-Origin": "http://localhost:391",
             "Content-Type": "application/json",
             "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
@@ -241,7 +244,7 @@ const server = Server.createServer((req, res) => {
     }
 
 })
-server.listen(391)
+server.listen(port)
 
 setInterval(() => {
     let timer = new Date().getTime()

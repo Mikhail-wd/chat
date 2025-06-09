@@ -97,7 +97,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    axios.get("http://109.226.196.146:391/chat-api/init-get-messages", {
+    axios.get(import.meta.env.BASE_URL+"chat-api/init-get-messages", {
       headers: {
         'Content-Type': 'application/json'
       }

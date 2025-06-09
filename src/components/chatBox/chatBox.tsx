@@ -106,8 +106,8 @@ type User = {
     expired?: string | number,
 }
 
-const eventGetMessages = new EventSource("http://109.226.196.146:391/chat-api/get-messages")
-const eventGetUsers = new EventSource("http://109.226.196.146:391/chat-api/get-users")
+const eventGetMessages = new EventSource(import.meta.env.BASE_URL+"chat-api/get-messages")
+const eventGetUsers = new EventSource(import.meta.env.BASE_URL+"chat-api/get-users")
 
 export default function ChatBox() {
     const leftCol = useId()
@@ -146,7 +146,7 @@ export default function ChatBox() {
     //let server know that user is steel online
     useEffect(() => {
         let sendInter = setInterval((value = context.data.userColor, name = context.data.user_name) => {
-            axios.post("http://109.226.196.146:391/chat-api/enter-chat",
+            axios.post(import.meta.env.BASE_URL+"chat-api/enter-chat",
                 JSON.stringify({ user_name: name, user_id: context.data.user_id, user_color: value })
             ).then().catch(() => console.warn("Fail to connect to server"))
         }, 5000)
@@ -158,11 +158,11 @@ export default function ChatBox() {
     useEffect(() => {
         let tempData = localStorage.getItem("user_settings")
         if (tempData !== null) {
-            axios.post("http://109.226.196.146:391/chat-api/enter-chat",
+            axios.post(import.meta.env.BASE_URL+"chat-api/enter-chat",
                 JSON.stringify({ user_name: JSON.parse(tempData).name, user_id: context.data.user_id, user_color: JSON.parse(tempData).color })
             ).then().catch(() => console.warn("Fail to connect to server"))
         } else {
-            axios.post("http://109.226.196.146:391/chat-api/enter-chat",
+            axios.post(import.meta.env.BASE_URL+"chat-api/enter-chat",
                 JSON.stringify({ user_name: context.data.user_name, user_id: context.data.user_id, user_color: context.data.userColor })
             ).then().catch(() => console.warn("Fail to connect to server"))
         }
