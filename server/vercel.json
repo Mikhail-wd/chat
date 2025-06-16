@@ -4,8 +4,8 @@
     "src": "./index.js",
     "use": "@vercel/node"
   }],
-  "rewrites":[{
-    "source":"/(.*)",
-    "destination":"/"
+  "routes":[{
+    "src":"/(.*)",
+    "dest":"/"
   }]
 }
