@@ -54,6 +54,7 @@ EventEmitter.on("add_user", function (value) {
     }
     console.log("User: " + tempObject.user_name + " enter chat.")
 })
+
 EventEmitter.on("check_message_lenght", function (value) {
     let tempArray = []
     if (value.length >= 500) {
@@ -73,15 +74,11 @@ const server = Server.createServer((req, res) => {
 
     if (reqUrl === "/") {
         res.writeHead(200, {
-            "Connection": "keep-alive",
-            'Content-Type': 'text/event-stream',
-            'Access-Control-Allow-Origin': '*',
-            "Cache-Control": "no-cache",
         });
         EventEmitter.emit("check_message_lenght", messages)
         EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
     }
-     else if (reqUrl === "/chat-api/get-messages") {
+    else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
@@ -98,92 +95,97 @@ const server = Server.createServer((req, res) => {
         res.write(JSON.stringify(messages))
         res.end()
     }
-     else if (reqImag[1] === "assets") {
-        console.log("Assets loading")
-        file.readFile(`../dist${req.url}`, (err, data) => {
-            if (req.url.endsWith('.html')) {
-                file.readFile("../dist/index.html", (err, data) => {
-                    res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
-                    res.write(data)
-                    res.end()
-                })
-            }
-            if (req.url.endsWith('.css')) {
-                res.writeHead(200, {
-                    'Content-Type': 'text/css'
-                })
-                res.write(data)
-                res.end()
-                return
-            } if (req.url.endsWith('.gif')) {
-                res.writeHead(200, {
-                    'Content-Type': ' image/gif'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith('.woff')) {
-                res.writeHead(200, {
-                    'Content-Type': 'text/css'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith('.ttf')) {
-                res.writeHead(200, {
-                    'Content-Type': 'text/css'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith('.js') || req.url.endsWith('.map')) {
-                res.writeHead(200, {
-                    'Content-Type': 'text/javascript'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith('.png')) {
-                res.writeHead(200, {
-                    'Content-Type': ' image/png'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith('.jpeg')) {
-                res.writeHead(200, {
-                    'Content-Type': ' image/jpeg'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith(".webm")) {
-                res.writeHead(200, {
-                    'Content-Type': 'video/webm'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-            if (req.url.endsWith(".ico")) {
-                res.writeHead(200, {
-                    'Content-Type': 'image/avif'
-                })
-                res.write(data)
-                res.end()
-                return
-            }
-        })
-    }
-     else if (reqUrl === "/chat-api/message") {
+    // else if (reqImag[1] === "assets") {
+    //     console.log("Assets loading")
+    //     file.readFile(`../dist${req.url}`, (err, data) => {
+    //         if (req.url.endsWith('.html')) {
+    //             file.readFile("../dist/index.html", (err, data) => {
+    //                 res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
+    //                 res.write(data)
+    //                 res.end()
+    //             })
+    //         }
+    //         if (req.url.endsWith('.css')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'text/css'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         } if (req.url.endsWith('.gif')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': ' image/gif'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith('.woff')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'text/css'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith('.ttf')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'text/css'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith('.js') || req.url.endsWith('.map')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'text/javascript'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith('.png')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': ' image/png'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith('.jpeg')) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': ' image/jpeg'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith(".webm")) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'video/webm'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //         if (req.url.endsWith(".ico")) {
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'image/avif'
+    //             })
+    //             res.write(data)
+    //             res.end()
+    //             return
+    //         }
+    //     })
+    // }
+    else if (reqUrl === "/chat-api/message") {
         req.on('data', (data) => {
-            EventEmitter.emit("add_message", JSON.parse(data))
+            if (data) {
+                EventEmitter.emit("add_message", JSON.parse(data))
+            } else {
+                Console.log("Error in 186")
+            }
+
         }
         )
         res.writeHead(200, {
@@ -212,15 +214,14 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/enter-chat") {
         req.on('data', (data) => {
-            EventEmitter.emit("add_user", data)
+            if (data) {
+                EventEmitter.emit("add_user", data)
+            } else {
+                console.log("Error on 220")
+            }
         }
         )
-        res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:5173",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
-        });
+        res.writeHead(200);
         res.write(JSON.stringify(usersList))
         res.end()
         // setInterval(() => {
@@ -247,10 +248,10 @@ const server = Server.createServer((req, res) => {
     }
 
 })
-server.listen(port)
-console.log("Server is function")
 setInterval(() => {
     let timer = new Date().getTime()
     let toDelite = usersList.filter(element => element.expired > timer)
     usersList = toDelite
 }, 3000)
+server.listen(port)
+console.log("Server is function")
