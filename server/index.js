@@ -82,6 +82,7 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
+            "Connection": "keep-alive",
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "https://online-chat-blond.vercel.app",
             "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
@@ -91,6 +92,7 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
+            "Connection": "keep-alive",
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "https://online-chat-blond.vercel.app",
             "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
