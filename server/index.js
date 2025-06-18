@@ -192,7 +192,7 @@ const server = Server.createServer((req, res) => {
         )
         res.writeHead(200,{
             "Connection": "keep-alive",
-            'Content-Type': 'text/event-stream',
+            'Content-Type': 'text/json',
             'Access-Control-Allow-Origin': '*',
             "Cache-Control": "no-cache",
         });
