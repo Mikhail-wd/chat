@@ -83,9 +83,9 @@ const server = Server.createServer((req, res) => {
     else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Connection": "keep-alive",
-            "Content-Type": "application/json",
+            'Content-Type': 'text/event-stream',
             "Access-Control-Allow-Origin": "https://online-chat-blond.vercel.app",
-            "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         });
         EventEmitter.emit("check_message_lenght", messages)
         EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
@@ -95,7 +95,7 @@ const server = Server.createServer((req, res) => {
             "Connection": "keep-alive",
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "https://online-chat-blond.vercel.app",
-            "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         });
         res.write(JSON.stringify(messages))
         res.end()
@@ -192,10 +192,10 @@ const server = Server.createServer((req, res) => {
             }
         }
         )
-        res.writeHead(200,{
+        res.writeHead(200, {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "https://online-chat-blond.vercel.app",
-            "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         });
         res.write(JSON.stringify("Message sended"))
         res.end()
@@ -224,7 +224,7 @@ const server = Server.createServer((req, res) => {
             }
         }
         )
-        res.writeHead(200,{
+        res.writeHead(200, {
             "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',
         });
