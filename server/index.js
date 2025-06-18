@@ -189,12 +189,7 @@ const server = Server.createServer((req, res) => {
 
         }
         )
-        res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:391",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
-        });
+        res.writeHead(200);
         res.write(JSON.stringify("Message sended"))
         res.end()
     }
