@@ -74,9 +74,10 @@ const server = Server.createServer((req, res) => {
 
     if (reqUrl === "/") {
         res.writeHead(200, {
+            "Content-Type": "application/json",
         });
-        EventEmitter.emit("check_message_lenght", messages)
-        EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
+        res.write(JSON.stringify(messages))
+        res.end()
     }
     else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
