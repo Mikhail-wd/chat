@@ -191,8 +191,10 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200,{
-            "Content-Type": "text/json",
+            "Connection": "keep-alive",
+            'Content-Type': 'text/event-stream',
             'Access-Control-Allow-Origin': '*',
+            "Cache-Control": "no-cache",
         });
         res.write(JSON.stringify("Message sended"))
         res.end()
