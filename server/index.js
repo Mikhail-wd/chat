@@ -3,7 +3,7 @@ import file from "fs"
 
 import eventEmitter from "events"
 
-const port = 391
+const port = 8080
 
 let messages = [
     { name: "TestUser", message: "Oh shit this is working", user_color: "#fff", image_link: null }
@@ -248,7 +248,7 @@ const server = Server.createServer((req, res) => {
 
 })
 server.listen(port)
-
+console.log("Server is function")
 setInterval(() => {
     let timer = new Date().getTime()
     let toDelite = usersList.filter(element => element.expired > timer)

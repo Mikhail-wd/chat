@@ -245,7 +245,7 @@ const server = Server.createServer((req, res) => {
 
 })
 server.listen(port)
-
+console.log("Server is function")
 setInterval(() => {
     let timer = new Date().getTime()
     let toDelite = usersList.filter(element => element.expired > timer)
