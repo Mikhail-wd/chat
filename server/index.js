@@ -82,18 +82,16 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
-            "Connection": "keep-alive",
-            'Content-Type': 'text/event-stream',
+            "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',
-            "Cache-Control": "no-cache",
         });
         EventEmitter.emit("check_message_lenght", messages)
         EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
-            'Access-Control-Allow-Origin': '*',
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': '*',
         });
         res.write(JSON.stringify(messages))
         res.end()
@@ -191,10 +189,8 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200,{
-            "Connection": "keep-alive",
-            'Content-Type': 'text/json',
+            "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',
-            "Cache-Control": "no-cache",
         });
         res.write(JSON.stringify("Message sended"))
         res.end()
