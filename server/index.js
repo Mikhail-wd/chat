@@ -192,6 +192,7 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200,{
+            "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',
         });
         res.write(JSON.stringify("Message sended"))
@@ -222,15 +223,11 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200,{
+            "Content-Type": "application/json",
             'Access-Control-Allow-Origin': '*',
         });
         res.write(JSON.stringify(usersList))
         res.end()
-        // setInterval(() => {
-        //     let timer = new Date().getTime()
-        //     let toDelite = usersList.filter(element => element.expired > timer)
-        //     usersList = toDelite
-        // }, 3000)
     }
     else if (reqUrl === "/chat-api/exit-chat") {
         req.on('data', (data) => {
