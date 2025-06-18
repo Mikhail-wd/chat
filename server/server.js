@@ -3,7 +3,7 @@ import file from "fs"
 
 import eventEmitter from "events"
 
-const port = 391
+const port = 8080
 
 let messages = [
     { name: "TestUser", message: "Oh shit this is working", user_color: "#fff", image_link: null }
