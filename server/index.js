@@ -188,11 +188,10 @@ const server = Server.createServer((req, res) => {
             } else {
                 Console.log("Error in 186")
             }
-
         }
         )
         res.writeHead(200,{
-            "Content-Type": "application/json",
+            "Content-Type": "text/json",
             'Access-Control-Allow-Origin': '*',
         });
         res.write(JSON.stringify("Message sended"))
