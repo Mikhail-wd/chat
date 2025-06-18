@@ -33,7 +33,7 @@ export default function Input() {
         if (chatMsg.length !== 0 && !chatMsg.startsWith("https://")) {
             setChatMsg("")
 
-            axios.post(import.meta.env.BASE_URL+"chat-api/message",
+            axios.post(import.meta.env.VITE_SERVER+"chat-api/message",
                 JSON.stringify({ name: context.data.user_name, message: chatMsg, image_link: null, user_color: context.data.userColor, selected_users: context.data.selected_users_list }),
                 {
                     headers: {
@@ -45,7 +45,7 @@ export default function Input() {
         } else if (chatMsg.startsWith("https://") && chatMsg.length !== 0) {
             setChatMsg("")
             if (chatMsg.endsWith(".jpeg") || chatMsg.endsWith(".jpg") || chatMsg.endsWith(".png") || chatMsg.endsWith(".gif") || chatMsg.endsWith(".webp") || chatMsg.endsWith(".svg")) {
-                axios.post(import.meta.env.BASE_URL+"chat-api/message",
+                axios.post(import.meta.env.VITE_SERVER+"chat-api/message",
                     JSON.stringify({ name: context.data.user_name, message: "images", image_link: chatMsg, selected_users: context.data.selected_users_list }),
                     {
                         headers: {
@@ -61,7 +61,7 @@ export default function Input() {
         value.preventDefault()
         if (chatMsg.length !== 0 && !chatMsg.startsWith("https://")) {
             setChatMsg("")
-            axios.post(import.meta.env.BASE_URL+"chat-api/message",
+            axios.post(import.meta.env.VITE_SERVER+"chat-api/message",
                 JSON.stringify({ name: context.data.user_name, message: chatMsg, image_link: null, user_color: context.data.userColor, selected_users: context.data.selected_users_list }),
                 {
                     headers: {
@@ -73,7 +73,7 @@ export default function Input() {
         } else if (chatMsg.startsWith("https://") && chatMsg.length !== 0) {
             setChatMsg("")
             if (chatMsg.endsWith(".jpeg") || chatMsg.endsWith(".jpg") || chatMsg.endsWith(".png") || chatMsg.endsWith(".gif") || chatMsg.endsWith(".webp") || chatMsg.endsWith(".svg")) {
-                axios.post(import.meta.env.BASE_URL+"chat-api/message",
+                axios.post(import.meta.env.VITE_SERVER+"chat-api/message",
                     JSON.stringify({ name: context.data.user_name, message: "images", image_link: chatMsg, user_color: context.data.userColor, selected_users: context.data.selected_users_list }),
                     {
                         headers: {

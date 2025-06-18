@@ -95,9 +95,9 @@ function App() {
       dispatch({ type: "set_user", payload: JSON.parse(tempData) })
     }
   }, [])
-
+  
   useEffect(() => {
-    axios.get(import.meta.env.BASE_URL+"chat-api/init-get-messages", {
+    axios.get(import.meta.env.VITE_SERVER+"chat-api/init-get-messages", {
       headers: {
         'Content-Type': 'application/json'
       }
