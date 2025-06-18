@@ -75,6 +75,7 @@ const server = Server.createServer((req, res) => {
     if (reqUrl === "/") {
         res.writeHead(200, {
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': '*'
         });
         res.write(JSON.stringify(messages))
         res.end()
@@ -91,6 +92,7 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
+            'Access-Control-Allow-Origin': '*',
             "Content-Type": "application/json",
         });
         res.write(JSON.stringify(messages))
@@ -189,7 +191,9 @@ const server = Server.createServer((req, res) => {
 
         }
         )
-        res.writeHead(200);
+        res.writeHead(200,{
+            'Access-Control-Allow-Origin': '*',
+        });
         res.write(JSON.stringify("Message sended"))
         res.end()
     }
@@ -217,7 +221,9 @@ const server = Server.createServer((req, res) => {
             }
         }
         )
-        res.writeHead(200);
+        res.writeHead(200,{
+            'Access-Control-Allow-Origin': '*',
+        });
         res.write(JSON.stringify(usersList))
         res.end()
         // setInterval(() => {
