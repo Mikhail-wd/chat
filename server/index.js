@@ -6,7 +6,7 @@ import eventEmitter from "events"
 const port = 8080
 
 let messages = [
-    { name: "TestUser", message: "Oh shit this is working", user_color: "#fff", image_link: null }
+    { name: "TestUser", message: "Welcome", user_color: "#fff", image_link: null }
 ]
 let usersList = []
 
