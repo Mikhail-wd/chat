@@ -100,89 +100,7 @@ const server = Server.createServer((req, res) => {
         res.write(JSON.stringify(messages))
         res.end()
     }
-    // else if (reqImag[1] === "assets") {
-    //     console.log("Assets loading")
-    //     file.readFile(`../dist${req.url}`, (err, data) => {
-    //         if (req.url.endsWith('.html')) {
-    //             file.readFile("../dist/index.html", (err, data) => {
-    //                 res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
-    //                 res.write(data)
-    //                 res.end()
-    //             })
-    //         }
-    //         if (req.url.endsWith('.css')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': 'text/css'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         } if (req.url.endsWith('.gif')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': ' image/gif'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith('.woff')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': 'text/css'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith('.ttf')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': 'text/css'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith('.js') || req.url.endsWith('.map')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': 'text/javascript'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith('.png')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': ' image/png'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith('.jpeg')) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': ' image/jpeg'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith(".webm")) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': 'video/webm'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //         if (req.url.endsWith(".ico")) {
-    //             res.writeHead(200, {
-    //                 'Content-Type': 'image/avif'
-    //             })
-    //             res.write(data)
-    //             res.end()
-    //             return
-    //         }
-    //     })
-    // }
+   
     else if (reqUrl === "/chat-api/message") {
         req.on('data', (data) => {
             if (data) {
@@ -201,12 +119,6 @@ const server = Server.createServer((req, res) => {
         res.end()
     }
     else if (reqUrl === "/chat-api/get-users") {
-        // res.writeHead(200, {
-        //     "Access-Control-Allow-Origin": "http://localhost:5173",
-        //     "Content-Type": "application/json"
-        // });
-        // res.write(JSON.stringify(usersList))
-        // res.end()
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
