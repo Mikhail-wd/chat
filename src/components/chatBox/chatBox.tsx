@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext, useId } from "react"
-import { Scrollbar } from "react-scrollbars-custom"
 import TenerGif from "../tinerGifs/tinerGifs"
 import Input from "./input"
 import MenuBtn from "./menu"
