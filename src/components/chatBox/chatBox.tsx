@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext, useId } from "react"
+import TenerGif from "../tinerGifs/tinerGifs"
 import Input from "./input"
 import MenuBtn from "./menu"
 import ColorPicker from "../colorPicker/colorPicker"
@@ -230,6 +231,7 @@ export default function ChatBox() {
                     <Input />
                     <ColorPicker />
                     <MenuBtn />
+                    <TenerGif />
                 </FooterRow>
             </FooterPanel>
         </ChatWrapper>
