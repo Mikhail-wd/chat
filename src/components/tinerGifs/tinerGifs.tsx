@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { AppState } from "../../App"
-import Gif from '../../assets/photo.png'
+import Gif from '../../assets/file.png'
 import axios from "axios";
 import styled from "styled-components"
 
@@ -88,7 +88,6 @@ export default function TenerGif() {
     )
 
     function httpGetRequestSearch(value: null | String) {
-        document.getElementById("wrapper-target")?.focus()
         axios.get(compState.urlSearch + "?key=" + compState.apiKey + "&q=" + value).then(
             (resp) => {
                 setData(resp.data.results)
@@ -122,12 +121,13 @@ export default function TenerGif() {
         }
         refController.current = new AbortController()
         const signal = refController.current.signal
-
-        setTimeout(() => {
-            fetch(compState.urlSearch + "?key=" + compState.apiKey + "&q=" + searchPrase, { signal: signal })
-                .then(response => { return response.json() })
-                .then(res => { setData(res.results)})
-        }, 2000)
+        if (searchPrase !== null ) {
+            setTimeout(() => {
+                fetch(compState.urlSearch + "?key=" + compState.apiKey + "&q=" + searchPrase, { signal: signal })
+                    .then(response => { return response.json() })
+                    .then(res => { setData(res.results) })
+            }, 2000)
+        }
 
         return () => {
             if (refController.current) {
