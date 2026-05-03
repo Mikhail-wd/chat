@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext, useId } from "react"
+import { Scrollbar } from "react-scrollbars-custom"
 import TenerGif from "../tinerGifs/tinerGifs"
 import Input from "./input"
 import MenuBtn from "./menu"
@@ -48,14 +49,19 @@ const ChatVisualLC = styled.div`
     flex-grow: 10;
     overflow-y: scroll;
     padding-bottom: 10px;
+    scrollbar-color: var(--black-400) var(--black-500);
+  scrollbar-width: thin;
 `
 const ChatVisualRC = styled.div`
+    box-sizing:border-box;
     display: flex;
     flex-direction: column;
     gap: 9px;
     padding: 0px 8px;
     min-width: 30%;
     overflow-y: scroll;
+    scrollbar-color: var(--black-400) var(--black-500);
+  scrollbar-width: thin;
 `
 const MessageElement = styled.div<{ state: boolean }>`
     background-color: ${props => props.state ? "var(--gray-500)" : "inherit"};
@@ -107,8 +113,8 @@ type User = {
     expired?: string | number,
 }
 
-const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER+"chat-api/get-messages")
-const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER+"chat-api/get-users")
+const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
+const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
 
 export default function ChatBox() {
     const leftCol = useId()
@@ -147,7 +153,7 @@ export default function ChatBox() {
     //let server know that user is steel online
     useEffect(() => {
         let sendInter = setInterval((value = context.data.userColor, name = context.data.user_name) => {
-            axios.post(import.meta.env.VITE_SERVER+"chat-api/enter-chat",
+            axios.post(import.meta.env.VITE_SERVER + "chat-api/enter-chat",
                 JSON.stringify({ user_name: name, user_id: context.data.user_id, user_color: value })
             ).then().catch(() => console.warn("Fail to connect to server"))
         }, 5000)
@@ -159,11 +165,11 @@ export default function ChatBox() {
     useEffect(() => {
         let tempData = localStorage.getItem("user_settings")
         if (tempData !== null) {
-            axios.post(import.meta.env.VITE_SERVER+"chat-api/enter-chat",
+            axios.post(import.meta.env.VITE_SERVER + "chat-api/enter-chat",
                 JSON.stringify({ user_name: JSON.parse(tempData).name, user_id: context.data.user_id, user_color: JSON.parse(tempData).color })
             ).then().catch(() => console.warn("Fail to connect to server"))
         } else {
-            axios.post(import.meta.env.VITE_SERVER+"chat-api/enter-chat",
+            axios.post(import.meta.env.VITE_SERVER + "chat-api/enter-chat",
                 JSON.stringify({ user_name: context.data.user_name, user_id: context.data.user_id, user_color: context.data.userColor })
             ).then().catch(() => console.warn("Fail to connect to server"))
         }
@@ -234,6 +240,6 @@ export default function ChatBox() {
                     <TenerGif />
                 </FooterRow>
             </FooterPanel>
-        </ChatWrapper>
+        </ChatWrapper >
     )
 }

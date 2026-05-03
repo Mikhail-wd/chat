@@ -148,14 +148,14 @@ export default function TenerGif() {
                         <LeftCol>
                             {compData !== null ? compData.map((elem, index) => {
                                 if (!(index % 2)) {
-                                    return <ImageGif src={elem.media[0].gif.url} key={index} onClick={() => sendingGif(elem.media[0].gif.url)} />
+                                    return <ImageGif src={elem.media[0].gif.url} key={elem.id} onClick={() => sendingGif(elem.media[0].gif.url)} />
                                 }
                             }) : "Loading..."}
                         </LeftCol>
                         <RightCol>
                             {compData !== null ? compData.map((elem, index) => {
                                 if (index % 2) {
-                                    return <ImageGif src={elem.media[0].gif.url} key={index} onClick={() => sendingGif(elem.media[0].gif.url)} />
+                                    return <ImageGif src={elem.media[0].gif.url} key={elem.id} onClick={() => sendingGif(elem.media[0].gif.url)} />
                                 }
                             }) : "Loading..."}
                         </RightCol>
