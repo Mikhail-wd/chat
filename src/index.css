@@ -3,6 +3,9 @@
   src: url("../src/fonts/8bit/Nineteend2b5.woff");
 }
 
+boody {
+  overflow: hidden;
+}
 #root {
   width: 100%;
 }

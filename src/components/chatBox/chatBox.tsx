@@ -13,7 +13,7 @@ const ChatWrapper = styled.div`
     height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
 `
 const FooterPanel = styled.div`
