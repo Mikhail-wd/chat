@@ -14,7 +14,8 @@ type Store = {
   user_name: string,
   usersList: Array<{ user_name: string, user_id: number, expired: number, user_color: string }> | null,
   user_id: number,
-  userColor: string
+  userColor: string,
+  userFont: string | null
 }
 
 const initData: {
@@ -29,6 +30,7 @@ const initStore: Store = {
   messages: null,
   user_name: "Гость",
   usersList: null,
+  userFont: "regular",
   user_id: Math.ceil(Math.random() * 100000000)
 }
 
@@ -66,8 +68,17 @@ function reducer(state: Store, action: Action): Store {
       }
 
     }
+    case "change_font":
+      let tempObject = localStorage.getItem("user_settings")
+      console.log( action.payload)
+      if (tempObject !== null) {
+        let parsedObject = JSON.parse(tempObject)
+        parsedObject.fontName = action.payload
+        localStorage.setItem("user_settings", JSON.stringify(parsedObject))
+      }
+      return { ...state, userFont: action.payload }
     case "set_user": {
-      return { ...state, user_name: action.payload.name, userColor: action.payload.color }
+      return { ...state, user_name: action.payload.name, userColor: action.payload.color, userFont: action.payload.fontName }
     }
     case "change_name": {
       let tempObject = localStorage.getItem("user_settings")
@@ -95,9 +106,9 @@ function App() {
       dispatch({ type: "set_user", payload: JSON.parse(tempData) })
     }
   }, [])
-  
+
   useEffect(() => {
-    axios.get(import.meta.env.VITE_SERVER+"chat-api/init-get-messages", {
+    axios.get(import.meta.env.VITE_SERVER + "chat-api/init-get-messages", {
       headers: {
         'Content-Type': 'application/json'
       }

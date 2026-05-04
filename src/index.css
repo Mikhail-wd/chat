@@ -1,14 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Sans:ital,wght@0,100..1000;1,100..1000&family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @font-face {
   font-family: Pixelbit;
   src: url("../src/fonts/8bit/Nineteend2b5.woff");
 }
 
+.monst {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jost {
+  font-size: 16px;
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ancs {
+  font-size: 16px;
+  line-height: 15px;
+  font-family: "Ancizar Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 boody {
   overflow: hidden;
 }
+
 #root {
   width: 100%;
 }
+
 :root {
   overflow-x: hidden;
   font-family: Pixelbit, system-ui, sans-serif;

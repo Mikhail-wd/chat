@@ -9,12 +9,11 @@ const MenuWrapper = styled.div`
     }
 `
 const Menu = styled.div`
-    padding: 0px 35px;
+    padding: 10px 35px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap:30px;
     cursor: default;
     width: 200px;
     height: 250px;
@@ -53,6 +52,9 @@ export default function MenuBtn() {
             setShowMenu(false)
         }
     }
+    function selectingFont(value:string) {
+        context.dispatch({ type: "change_font", payload: value })
+    }
 
     useEffect(() => {
         let storageData = localStorage.getItem("user_settings")
@@ -60,6 +62,7 @@ export default function MenuBtn() {
             let userData = {
                 name: "Гость",
                 color: "#fff",
+                fontName: "regular"
             }
             localStorage.setItem("user_settings", JSON.stringify(userData))
             context.dispatch({ type: "set_user", payload: userData })
@@ -71,7 +74,8 @@ export default function MenuBtn() {
         if (storageData !== null) {
             let userData = {
                 name: JSON.parse(storageData).name,
-                color: JSON.parse(storageData).color
+                color: JSON.parse(storageData).color,
+                fontName: JSON.parse(storageData).fontName
             }
             localStorage.setItem("user_settings", JSON.stringify(userData))
         }
@@ -82,6 +86,13 @@ export default function MenuBtn() {
                 <Menu>
                     <Header>Enter name:</Header>
                     <FooterPanelInput minLength={5} placeholder="Name" onChange={(event) => changeName(event)} />
+                    <label>Select font : </label>
+                    <select name="fontOption" value={context.data.userFont} onChange={(event) => selectingFont(event.target.value)}>
+                        <option value="regular">Regular</option>
+                        <option value="option1">Montserrat</option>
+                        <option value="option2">Jost</option>
+                        <option value="option3">Ancizar</option>
+                    </select>
                     <Button onClick={() => sendName()}>
                         Done
                     </Button>

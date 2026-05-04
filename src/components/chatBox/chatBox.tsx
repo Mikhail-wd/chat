@@ -49,7 +49,7 @@ const ChatVisualLC = styled.div`
     overflow-y: scroll;
     padding-bottom: 10px;
     scrollbar-color: var(--black-400) var(--black-500);
-  scrollbar-width: thin;
+     scrollbar-width: thin;
 `
 const ChatVisualRC = styled.div`
     box-sizing:border-box;
@@ -63,12 +63,13 @@ const ChatVisualRC = styled.div`
   scrollbar-width: thin;
 `
 const MessageElement = styled.div<{ state: boolean }>`
+    word-wrap: anywhere;
     background-color: ${props => props.state ? "var(--gray-500)" : "inherit"};
-    line-height: 11px;
+    line-height: 15px;
 `
 const UsersElement = styled.div<{ state?: string }>`
     text-wrap:nowrap;
-    line-height: 11px;
+    line-height: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     color:${props => props.state};
@@ -120,6 +121,7 @@ export default function ChatBox() {
     const rightCol = useId()
     const footer = useId()
     const context = useContext(AppState)
+    const [userFont, setUserFont] = useState<string>("")
     const [chatMessages, setChatMessages] = useState<Array<Message> | null>(null)
     const [usersList, setUsersList] = useState<Array<User> | null>(null)
     const [selected_users, setSelectedUsers] = useState<Array<User> | null>(null)
@@ -128,15 +130,32 @@ export default function ChatBox() {
         context.dispatch({ type: "selecting_user_from_chat_list", payload: value })
     }
 
+    function checkFont(value: String | null) {
+        console.log(value)
+        switch (value) {
+            case "option1":
+                return "monst"
+                break
+            case "option2":
+                return "jost"
+                break
+            case "option3":
+                return "ancs"
+                break
+            default:
+                return ""
+        }
+    }
     //set sse for messages and users
     useEffect(() => {
+        setUserFont(checkFont(context.data.userFont))
         eventGetMessages.onmessage = (event) => {
             context.dispatch({ type: "resive_messages", payload: JSON.parse(event.data) })
         }
         eventGetUsers.onmessage = (event) => {
             context.dispatch({ type: "resive_users", payload: JSON.parse(event.data) })
         }
-    }, [])
+    }, [context.data.userFont])
 
     //set states for messages and users
     useEffect(() => {
@@ -149,6 +168,7 @@ export default function ChatBox() {
     useEffect(() => {
         setSelectedUsers(context.data.selected_users_list)
     }, [context.data.selected_users_list])
+
     //let server know that user is steel online
     useEffect(() => {
         let sendInter = setInterval((value = context.data.userColor, name = context.data.user_name) => {
@@ -173,8 +193,9 @@ export default function ChatBox() {
             ).then().catch(() => console.warn("Fail to connect to server"))
         }
     }, [])
+
     return (
-        <ChatWrapper>
+        <ChatWrapper className={userFont}>
             <ChatVisual >
                 <ChatVisualLC key={leftCol}>
                     {chatMessages !== null ? chatMessages.map((element, index) => {
