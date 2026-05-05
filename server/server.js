@@ -1,4 +1,4 @@
-meimport Server from "http"
+import Server from "http"
 import file from "fs"
 
 import eventEmitter from "events"
@@ -70,7 +70,7 @@ const server = Server.createServer((req, res) => {
     const reqMethod = req.method
     const reqImag = req.url.split("/")
     const reqUrl = req.url
-
+    
     if (reqUrl === "/") {
         file.readFile("../dist/index.html", (err, data) => {
             res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
@@ -184,7 +184,7 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:391",
+            "Access-Control-Allow-Origin": "http://localhost:5173",
             "Content-Type": "application/json",
             "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'

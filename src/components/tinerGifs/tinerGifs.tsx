@@ -43,6 +43,7 @@ const TinerGif = styled.div`
 const ImageGif = styled.img`
     max-width:50%;
     min-width:100%;
+    border-radius:8px;
         &:hover {
         cursor: pointer;
     }

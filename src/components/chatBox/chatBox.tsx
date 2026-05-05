@@ -79,8 +79,9 @@ const ImageWrapper = styled.img`
     max-width: 50%;
     border-radius: 8px;
     margin-top: 5px;
-    @media screen and (max-width:400px) {
-        min-width:100% ;
+    @media screen and (max-width:450px) {
+        max-width: 100%;
+        width:100% ;
     }
 `
 const FooterRow = styled.div`
@@ -131,7 +132,6 @@ export default function ChatBox() {
     }
 
     function checkFont(value: String | null) {
-        console.log(value)
         switch (value) {
             case "option1":
                 return "monst"
@@ -146,6 +146,7 @@ export default function ChatBox() {
                 return ""
         }
     }
+    
     //set sse for messages and users
     useEffect(() => {
         setUserFont(checkFont(context.data.userFont))
