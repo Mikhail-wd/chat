@@ -15,7 +15,8 @@ type Store = {
   usersList: Array<{ user_name: string, user_id: number, expired: number, user_color: string }> | null,
   user_id: number,
   userColor: string,
-  userFont: string | null
+  userFont: string | null,
+  users: boolean
 }
 
 const initData: {
@@ -31,7 +32,8 @@ const initStore: Store = {
   user_name: "Гость",
   usersList: null,
   userFont: "regular",
-  user_id: Math.ceil(Math.random() * 100000000)
+  user_id: Math.ceil(Math.random() * 100000000),
+  users: true
 }
 
 function reducer(state: Store, action: Action): Store {
@@ -41,6 +43,9 @@ function reducer(state: Store, action: Action): Store {
     }
     case "resive_users": {
       return { ...state, usersList: action.payload }
+    }
+    case "toggle_users": {
+      return { ...state, users: !state.users }
     }
     case "change_color": {
       return { ...state, userColor: action.payload }
@@ -70,7 +75,7 @@ function reducer(state: Store, action: Action): Store {
     }
     case "change_font":
       let tempObject = localStorage.getItem("user_settings")
-      console.log( action.payload)
+      console.log(action.payload)
       if (tempObject !== null) {
         let parsedObject = JSON.parse(tempObject)
         parsedObject.fontName = action.payload

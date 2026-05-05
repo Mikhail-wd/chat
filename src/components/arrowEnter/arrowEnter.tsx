@@ -8,7 +8,7 @@ const SVGIcon = styled.svg`
 
 export default function ArrowEnter({click}:any) {
     return (
-        <SVGIcon id="svg" fill="none" stroke="#CCCCCC" onClick={click}
+        <SVGIcon id="svg" fill="#CCCCCC" stroke="#CCCCCC" onClick={click}
             width="30" height="30" version="1.1" viewBox="144 144 512 512" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)">
             <g id="IconSvg_bgCarrier" strokeWidth="0"></g>
             <g id="IconSvg_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" stroke="#CCCCCC" strokeWidth="0">

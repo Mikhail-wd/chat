@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext, useId } from "react"
 import TenerGif from "../tinerGifs/tinerGifs"
+import ArrowDirection from "../arrowDirection/arrowDirection"
 import Input from "./input"
 import MenuBtn from "./menu"
 import ColorPicker from "../colorPicker/colorPicker"
@@ -97,6 +98,26 @@ const FooterUserWrapper = styled.div`
     border-radius: 8px;
     padding: 4px 9px;
 `
+const ToggleUsersList = styled.div`
+    position: fixed;
+    box-sizing: border-box;
+    display:flex;
+    align-items: center;
+    gap: 9px;
+    top:0px;
+    right:0px;
+    background-color:var(--black-400);
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align:center;
+
+    &:hover {
+       cursor: pointer;
+    }
+`
+const UsersListHeader = styled.span`
+    margin-top: 40px
+`
 
 type Message = {
     user_color: string,
@@ -146,7 +167,11 @@ export default function ChatBox() {
                 return ""
         }
     }
-    
+
+    function toggleUsersList() {
+        context.dispatch({ type: "toggle_users" })
+    }
+
     //set sse for messages and users
     useEffect(() => {
         setUserFont(checkFont(context.data.userFont))
@@ -229,17 +254,24 @@ export default function ChatBox() {
                         <MessageElement state={false}>~~~~~~Loading messages, please wait ~~~~~~~</MessageElement>
                     }
                 </ChatVisualLC>
-                <ChatVisualRC key={rightCol}>
-                    <span>В чате : {usersList !== null ? usersList.length : 0}</span>
-                    {usersList !== null ?
-                        usersList.map((element, index) => {
-                            return <UsersElement key={index}
-                                state={element.user_color}
-                                onClick={() => addingUserToState(element)}
-                            >{element.user_name}</UsersElement>
-                        }) : <UsersElement state={"#ffff"}>No users found</UsersElement>
-                    }
-                </ChatVisualRC>
+                <ToggleUsersList onClick={() => toggleUsersList()}>
+                    <ArrowDirection />Пользователи
+                </ToggleUsersList>
+                {context.data.users ?
+                    <>
+                        <ChatVisualRC key={rightCol}>
+                            <UsersListHeader >В чате : {usersList !== null ? usersList.length : 0}</UsersListHeader>
+                            {usersList !== null ?
+                                usersList.map((element, index) => {
+                                    return <UsersElement key={index}
+                                        state={element.user_color}
+                                        onClick={() => addingUserToState(element)}
+                                    >{element.user_name}</UsersElement>
+                                }) : <UsersElement state={"#ffff"}>No users found</UsersElement>
+                            }
+                        </ChatVisualRC>
+                    </>
+                    : null}
             </ChatVisual>
             <FooterPanel key={footer}>
 
