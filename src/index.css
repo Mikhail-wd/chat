@@ -95,7 +95,9 @@ body {
   justify-content: start;
   align-items: center;
 }
-
+#epr-category-nav-id {
+  display: none;
+}
 aside.EmojiPickerReact {
   position: absolute;
   bottom: 35px;
@@ -105,6 +107,7 @@ aside.EmojiPickerReact {
   --epr-focus-bg-color : var(--black-500);
   --epr-category-label-bg-color: var(--black-500);
   --epr-search-input-bg-color: var(--black-500);
+  --epr-category-nav: none;
   @media screen and (max-width: 450px) {
       right: -115px;
   }

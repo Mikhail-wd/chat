@@ -8,7 +8,7 @@ import { AppState } from "../../App"
 
 export const FooterPanelInput = styled.input`
     width: 100%;
-    padding: 8px;
+    padding: 8px 3px;
      box-sizing: border-box;
     border-radius: 4px;
     background-color: var(--black-400);
@@ -37,7 +37,7 @@ export default function Input() {
         setChatMsg(event.currentTarget.value)
     }
 
-    function addingEmoji(value: Emoji) {
+    function addingEmoji(value: Emoji ) {
         setChatMsg(chatMsg + value.emoji)
         if (focusInput.current !== null) {
             focusInput.current.focus()
@@ -108,8 +108,8 @@ export default function Input() {
         <Form onSubmit={(event) => sendMessage(event)}>
             <FooterPanelInput value={chatMsg} onChange={(event) => changeMessage(event)} maxLength={250} ref={focusInput} />
             <ArrowEnter click={assisInput} />
-            <EmojiIcon click={() => toggleEmoji()}>
-                {emojiState ? <EmojiPicker onEmojiClick={(emojiObject) => addingEmoji(emojiObject)} previewConfig={{ showPreview: false }} /> : null}
+            <EmojiIcon click={toggleEmoji}>
+               <EmojiPicker onEmojiClick={(emojiObject) => addingEmoji(emojiObject)} previewConfig={{ showPreview: false }} />
             </EmojiIcon>
         </Form>
     )

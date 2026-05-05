@@ -3,7 +3,6 @@ import TenerGif from "../tinerGifs/tinerGifs"
 import ArrowDirection from "../arrowDirection/arrowDirection"
 import Input from "./input"
 import MenuBtn from "./menu"
-import ColorPicker from "../colorPicker/colorPicker"
 import styled from "styled-components"
 import { AppState } from "../../App"
 import Spinner from '../../assets/spinner.gif'
@@ -82,7 +81,7 @@ const ImageWrapper = styled.img`
     margin-top: 5px;
     @media screen and (max-width:450px) {
         max-width: 100%;
-        width:100% ;
+        width:70% ;
     }
 `
 const FooterRow = styled.div`
@@ -288,7 +287,6 @@ export default function ChatBox() {
                     : null}
                 <FooterRow>
                     <Input />
-                    <ColorPicker />
                     <MenuBtn />
                     <TenerGif />
                 </FooterRow>
