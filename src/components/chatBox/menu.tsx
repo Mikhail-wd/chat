@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import { FooterPanelInput } from "./input"
 import styled from "styled-components"
 import { AppState } from "../../App"
-import ColorPicker from "../colorPicker/colorPicker"
 
 const MenuWrapper = styled.div`
     &:hover {
@@ -10,6 +9,7 @@ const MenuWrapper = styled.div`
     }
 `
 const Menu = styled.div`
+    z-index: 100;
     padding: 10px 35px;
     display: flex;
     flex-direction: column;
@@ -94,7 +94,6 @@ export default function MenuBtn() {
                     <Header>Enter name:</Header>
                     <NameWrapper>
                         <FooterPanelInput minLength={5} placeholder="Name" onChange={(event) => changeName(event)} />
-                        <ColorPicker />
                     </NameWrapper>
                     <label>Select font : </label>
                     <select name="fontOption" value={context.data.userFont} onChange={(event) => selectingFont(event.target.value)}>

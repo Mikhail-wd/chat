@@ -4,6 +4,7 @@ import axios from "axios"
 import EmojiIcon from "../emoji/emojiIcon"
 import { useContext, useRef, useState } from "react"
 import ArrowEnter from "../arrowEnter/arrowEnter"
+import ColorPicker from '../colorPicker/colorPicker';
 import { AppState } from "../../App"
 
 export const FooterPanelInput = styled.input`
@@ -108,6 +109,7 @@ export default function Input() {
         <Form onSubmit={(event) => sendMessage(event)}>
             <FooterPanelInput value={chatMsg} onChange={(event) => changeMessage(event)} maxLength={250} ref={focusInput} />
             <ArrowEnter click={assisInput} />
+            <ColorPicker />
             <EmojiIcon click={toggleEmoji}>
                <EmojiPicker onEmojiClick={(emojiObject) => addingEmoji(emojiObject)} previewConfig={{ showPreview: false }} />
             </EmojiIcon>

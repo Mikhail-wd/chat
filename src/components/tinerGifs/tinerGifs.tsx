@@ -8,7 +8,6 @@ const TinerSearchWrapper = styled.div`
     width: 100%;
     position: fixed;
     left:0px;
-    z-index:99;
     background-color: var(--gray-500);
     box-sizing: border-box;
     padding: 8px;
@@ -39,6 +38,7 @@ const TinerGif = styled.div`
     overflow-y: scroll;
     position: absolute;
     bottom: 50px;
+    z-index:210;
 `
 const ImageGif = styled.img`
     max-width:50%;
