@@ -15,6 +15,8 @@ type Store = {
   usersList: Array<{ user_name: string, user_id: number, expired: number, user_color: string }> | null,
   user_id: number,
   userColor: string,
+  userTheme: Array<string>,
+  activeWindow: null | string,
   userFont: string | null,
   users: boolean
 }
@@ -32,12 +34,17 @@ const initStore: Store = {
   user_name: "Гость",
   usersList: null,
   userFont: "regular",
+  userTheme: ["regular", "acid", "calm"],
   user_id: Math.ceil(Math.random() * 100000000),
+  activeWindow: null,
   users: true
 }
 
 function reducer(state: Store, action: Action): Store {
   switch (action.type) {
+    case "set_active_window": {
+      return { ...state, activeWindow: action.payload }
+    }
     case "resive_messages": {
       return { ...state, messages: action.payload }
     }
@@ -94,6 +101,11 @@ function reducer(state: Store, action: Action): Store {
       }
       return { ...state, user_name: action.payload }
     }
+    case "change_theme":
+      let tempValue = state.userTheme[0]
+      let tempArray = [...state.userTheme.slice(1)]
+      tempArray.push(tempValue)
+      return { ...state, userTheme: [...tempArray] }
     default:
       console.log("Error in reducer")
       return { ...state }

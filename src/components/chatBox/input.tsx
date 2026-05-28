@@ -3,16 +3,33 @@ import styled from "styled-components"
 import axios from "axios"
 import EmojiIcon from "../emoji/emojiIcon"
 import { useContext, useRef, useState } from "react"
-import ArrowEnter from "../arrowEnter/arrowEnter"
-import ColorPicker from '../colorPicker/colorPicker';
 import { AppState } from "../../App"
+import TenerGif from '../tinerGifs/tinerGifs';
 
 export const FooterPanelInput = styled.input`
-    width: 100%;
     padding: 8px 3px;
-     box-sizing: border-box;
+    box-sizing: border-box;
     border-radius: 4px;
-    background-color: var(--black-400);
+    background-color: var(--background-light);
+`
+const FooterPanelInputAlter = styled.input`
+    position: absolute;
+    width: 70%;
+    padding: 8px 3px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-left: -10px;
+    padding-left: 80px;
+    background-color: var(--background-light);
+`
+const FormWrapper = styled.label`
+    display: flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content:start;
+    gap: 10px;
+    padding: 2px 8px;
+    align-items: center;
 `
 const Form = styled.form`
     display: flex;
@@ -38,7 +55,7 @@ export default function Input() {
         setChatMsg(event.currentTarget.value)
     }
 
-    function addingEmoji(value: Emoji ) {
+    function addingEmoji(value: Emoji) {
         setChatMsg(chatMsg + value.emoji)
         if (focusInput.current !== null) {
             focusInput.current.focus()
@@ -107,12 +124,13 @@ export default function Input() {
 
     return (
         <Form onSubmit={(event) => sendMessage(event)}>
-            <FooterPanelInput value={chatMsg} onChange={(event) => changeMessage(event)} maxLength={250} ref={focusInput} />
-            <ArrowEnter click={assisInput} />
-            <ColorPicker />
-            <EmojiIcon click={toggleEmoji}>
-               <EmojiPicker onEmojiClick={(emojiObject) => addingEmoji(emojiObject)} previewConfig={{ showPreview: false }} />
-            </EmojiIcon>
+            <FormWrapper>
+                <EmojiIcon click={toggleEmoji}>
+                    <EmojiPicker onEmojiClick={(emojiObject) => addingEmoji(emojiObject)} previewConfig={{ showPreview: false }} />
+                </EmojiIcon>
+                <TenerGif />
+                <FooterPanelInputAlter value={chatMsg} onChange={(event) => changeMessage(event)} maxLength={250} ref={focusInput} placeholder={"Message"}/>
+            </FormWrapper>
         </Form>
     )
 } 

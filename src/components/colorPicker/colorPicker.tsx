@@ -29,6 +29,7 @@ export default function ColorPicker() {
     function colorSending() {
         let userData = localStorage.getItem("user_settings")
         setPopupState(!popupState)
+        context.dispatch({ type: "set_active_window", payload: context.data?.activeWindow == "colorPicker" ? null : "colorPicker" })
         context.dispatch({ type: "change_color", payload: color })
         console.log(color, context.data.userColor)
         if (userData !== null) {
@@ -47,7 +48,7 @@ export default function ColorPicker() {
     }, [])
     return (<>
         <SelectColor onClick={() => colorSending()} state={color} />
-        {popupState ?
+        {context.data?.activeWindow == "colorPicker" ?
             <ExternTheme >
                 <HexColorPicker color={color} onChange={setColor} />
             </ExternTheme>

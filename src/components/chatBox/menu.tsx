@@ -19,7 +19,7 @@ const Menu = styled.div`
     width: 200px;
     height: 250px;
     border-radius: 8px;
-    background-color: var(--gray-500);
+    background-color: var(--background);
     border: solid 1px white;
     bottom: 50px;
     right: 5%;
@@ -28,7 +28,7 @@ const Menu = styled.div`
 const Button = styled.div`
     padding: 16px 50px;
     border-radius: 8px;
-    background-color: var(--black-400);
+    background-color: var(--background-alt);
     margin-top: 10px;
     cursor: pointer;
 `
@@ -89,7 +89,7 @@ export default function MenuBtn() {
     }, [context.data])
     return (
         <MenuWrapper>
-            {showMenu ?
+            {context.data?.activeWindow == "menu" ?
                 <Menu>
                     <Header>Enter name:</Header>
                     <NameWrapper>
@@ -107,7 +107,7 @@ export default function MenuBtn() {
                     </Button>
                 </Menu> : null
             }
-            <p onClick={() => setShowMenu(!showMenu)}>Меню</p>
+            <p onClick={() => context.dispatch({ type: "set_active_window", payload: context.data?.activeWindow == "menu" ? null : "menu" })}>Menu</p>
         </MenuWrapper>
     )
 }

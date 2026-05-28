@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext, useId } from "react"
-import TenerGif from "../tinerGifs/tinerGifs"
-import ArrowDirection from "../arrowDirection/arrowDirection"
+import Header from "../header/header"
 import Input from "./input"
 import MenuBtn from "./menu"
 import styled from "styled-components"
 import { AppState } from "../../App"
 import Spinner from '../../assets/spinner.gif'
 import axios from "axios"
+import ColorPicker from "../colorPicker/colorPicker"
 
 const ChatWrapper = styled.div`
     min-width: 70dvw;
@@ -15,6 +15,7 @@ const ChatWrapper = styled.div`
     flex-direction: column;
     justify-content: end;
     align-items: center;
+    background-color:var(--background-light);
 `
 const FooterPanel = styled.div`
     bottom: 0;
@@ -27,7 +28,7 @@ const FooterPanel = styled.div`
     width: 100%;
     padding: 8px;
     border-radius: 4px;
-    background-color: var(--gray-500);
+    background-color: var(--background);
 `
 const ChatVisual = styled.div`
     box-sizing: border-box;
@@ -49,23 +50,23 @@ const ChatVisualLC = styled.div`
     overflow-y: scroll;
     padding-bottom: 10px;
     scrollbar-color: var(--black-400) var(--black-500);
-     scrollbar-width: thin;
+    scrollbar-width: thin;
 `
 const ChatVisualRC = styled.div`
     box-sizing:border-box;
     display: flex;
     flex-direction: column;
     gap: 9px;
-    padding: 0px 8px;
+    padding: 10px 8px 0px 8px;
     min-width: 30%;
     overflow-y: scroll;
     scrollbar-color: var(--black-400) var(--black-500);
-  scrollbar-width: thin;
+    scrollbar-width: thin;
 `
 const MessageElement = styled.div<{ state: boolean }>`
     word-wrap: anywhere;
     background-color: ${props => props.state ? "var(--gray-500)" : "inherit"};
-    line-height: 15px;
+    line-height: 15px;   
 `
 const UsersElement = styled.div<{ state?: string }>`
     text-wrap:nowrap;
@@ -73,7 +74,8 @@ const UsersElement = styled.div<{ state?: string }>`
     overflow: hidden;
     text-overflow: ellipsis;
     color:${props => props.state};
-    cursor: pointer;
+    cursor: pointer;    
+    font-weight: 600;
 `
 const ImageWrapper = styled.img`
     max-width: 50%;
@@ -90,33 +92,32 @@ const FooterRow = styled.div`
     gap: 9px;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: center;  
 `
 const FooterUserWrapper = styled.div`
-    background-color: var(--black-500);
     border-radius: 8px;
     padding: 4px 9px;
 `
-const ToggleUsersList = styled.div`
-    position: fixed;
-    box-sizing: border-box;
-    display:flex;
-    align-items: center;
-    gap: 9px;
-    top:0px;
-    right:0px;
-    background-color:var(--black-400);
-    padding: 8px 12px;
-    font-size: 14px;
-    text-align:center;
+// const ToggleUsersList = styled.div`
+//     position: fixed;
+//     box-sizing: border-box;
+//     display:flex;
+//     align-items: center;
+//     gap: 9px;
+//     top:0px;
+//     right:0px;
+//     background-color:var(--black-400);
+//     padding: 8px 12px;
+//     font-size: 14px;
+//     text-align:center;
 
-    &:hover {
-       cursor: pointer;
-    }
-`
-const UsersListHeader = styled.span`
-    margin-top: 40px
-`
+//     &:hover {
+//        cursor: pointer;
+//     }
+// `
+// const UsersListHeader = styled.span`
+//     margin-top: 40px
+// `
 
 type Message = {
     user_color: string,
@@ -143,6 +144,7 @@ export default function ChatBox() {
     const footer = useId()
     const context = useContext(AppState)
     const [userFont, setUserFont] = useState<string>("")
+    const [userTheme, setUserTheme] = useState<string>("")
     const [chatMessages, setChatMessages] = useState<Array<Message> | null>(null)
     const [usersList, setUsersList] = useState<Array<User> | null>(null)
     const [selected_users, setSelectedUsers] = useState<Array<User> | null>(null)
@@ -151,25 +153,27 @@ export default function ChatBox() {
         context.dispatch({ type: "selecting_user_from_chat_list", payload: value })
     }
 
+    function settingUserTheme() {
+        context.dispatch = { type: "change_theme", payload: "" }
+    }
+
     function checkFont(value: String | null) {
         switch (value) {
             case "option1":
                 return "monst"
-                break
             case "option2":
                 return "jost"
-                break
             case "option3":
                 return "ancs"
-                break
             default:
                 return ""
         }
     }
 
-    function toggleUsersList() {
-        context.dispatch({ type: "toggle_users" })
-    }
+    //set users theme
+    useEffect(() => {
+        setUserTheme(context.data.userTheme)
+    }, [context.data.userTheme])
 
     //set sse for messages and users
     useEffect(() => {
@@ -220,7 +224,8 @@ export default function ChatBox() {
     }, [])
 
     return (
-        <ChatWrapper className={userFont}>
+        <ChatWrapper className={userFont + " " + userTheme[0]}>
+            <Header />
             <ChatVisual >
                 <ChatVisualLC key={leftCol}>
                     {chatMessages !== null ? chatMessages.map((element, index) => {
@@ -253,13 +258,9 @@ export default function ChatBox() {
                         <MessageElement state={false}>~~~~~~Loading messages, please wait ~~~~~~~</MessageElement>
                     }
                 </ChatVisualLC>
-                <ToggleUsersList onClick={() => toggleUsersList()}>
-                    <ArrowDirection />Пользователи
-                </ToggleUsersList>
                 {context.data.users ?
                     <>
                         <ChatVisualRC key={rightCol}>
-                            <UsersListHeader >В чате : {usersList !== null ? usersList.length : 0}</UsersListHeader>
                             {usersList !== null ?
                                 usersList.map((element, index) => {
                                     return <UsersElement key={index}
@@ -273,7 +274,6 @@ export default function ChatBox() {
                     : null}
             </ChatVisual>
             <FooterPanel key={footer}>
-
                 {selected_users !== null ?
                     <FooterRow style={{ flexWrap: "wrap" }}>
                         {selected_users.map(element => {
@@ -287,8 +287,8 @@ export default function ChatBox() {
                     : null}
                 <FooterRow>
                     <Input />
+                    <ColorPicker />
                     <MenuBtn />
-                    <TenerGif />
                 </FooterRow>
             </FooterPanel>
         </ChatWrapper >

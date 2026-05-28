@@ -8,7 +8,7 @@ const TinerSearchWrapper = styled.div`
     width: 100%;
     position: fixed;
     left:0px;
-    background-color: var(--gray-500);
+    background-color: var(--background);
     box-sizing: border-box;
     padding: 8px;
 `
@@ -19,7 +19,7 @@ const TinerSearch = styled.input`
     padding: 8px;
     box-sizing: border-box;
     border-radius: 4px;
-    background-color: var(--black-400);
+    background-color: var(--background-light);
 `
 const TinerGifWrapper = styled.div`
     margin-top: 40px;
@@ -27,6 +27,7 @@ const TinerGifWrapper = styled.div`
     flex-direction:row;
     flex-wrap: nowrap;
     justify-content: space-around
+    z-index:999;
 `
 const TinerGif = styled.div`
     height:500px;
@@ -34,11 +35,11 @@ const TinerGif = styled.div`
     padding: 0px 8px 8px 8px;
     left:0px;
     box-sizing: border-box;
-    background-color:var(--gray-500);
+    background-color: var(--background);
     overflow-y: scroll;
     position: absolute;
-    bottom: 50px;
-    z-index:210;
+    bottom: 43px;
+    z-index:999;
 `
 const ImageGif = styled.img`
     max-width:50%;
@@ -51,6 +52,8 @@ const ImageGif = styled.img`
 const ImageIcon = styled.img`
     height:24px;
     width:24px;
+    position:relative;
+    z-index: 999;
     &:hover {
         cursor: pointer;
     }
@@ -140,7 +143,7 @@ export default function TenerGif() {
 
     return (
         <>
-            {compState.toggle ?
+            {context.data?.activeWindow == "tinerGif" ?
                 <TinerGif>
                     <TinerSearchWrapper id="wrapper-target">
                         <TinerSearch onChange={(event) => setPhrase(event.target.value)} />
@@ -163,7 +166,7 @@ export default function TenerGif() {
                     </TinerGifWrapper>
                 </TinerGif>
                 : null}
-            <ImageIcon src={Gif} alt="gif" onClick={() => setState({ ...compState, toggle: !compState.toggle })} />
+            <ImageIcon src={Gif} alt="gif" onClick={() => context.dispatch({ type: "set_active_window", payload: context.data?.activeWindow == "tinerGif" ? null : "tinerGif" })} />
         </>
     )
 }
