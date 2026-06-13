@@ -44,7 +44,7 @@ const NameWrapper = styled.div`
 
 export default function MenuBtn() {
     const context = useContext(AppState)
-    const [showMenu, setShowMenu] = useState<boolean>(false)
+    // const [showMenu, setShowMenu] = useState<boolean>(false)
     const [user_name, setUserName] = useState<string>("")
 
 
@@ -56,7 +56,7 @@ export default function MenuBtn() {
     function sendName() {
         if (user_name.length >= 5) {
             context.dispatch({ type: "change_name", payload: user_name })
-            setShowMenu(false)
+            // setShowMenu(false)
         }
     }
     function selectingFont(value: string) {
