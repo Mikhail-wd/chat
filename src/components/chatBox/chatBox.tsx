@@ -153,9 +153,9 @@ export default function ChatBox() {
         context.dispatch({ type: "selecting_user_from_chat_list", payload: value })
     }
 
-    function settingUserTheme() {
-        context.dispatch = { type: "change_theme", payload: "" }
-    }
+    // function settingUserTheme() {
+    //     context.dispatch = { type: "change_theme", payload: "" }
+    // }
 
     function checkFont(value: String | null) {
         switch (value) {
