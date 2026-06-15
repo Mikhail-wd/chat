@@ -84,7 +84,7 @@ const server = Server.createServer((req, res) => {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-v001.vercel.app/",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         });
         EventEmitter.emit("check_message_lenght", messages)
@@ -112,7 +112,7 @@ const server = Server.createServer((req, res) => {
         )
         res.writeHead(200, {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-v001.vercel.app/",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         });
         res.write(JSON.stringify("Message sended"))
@@ -153,7 +153,7 @@ const server = Server.createServer((req, res) => {
             "Access-Control-Allow-Origin": "http://localhost:5173",
             "Content-Type": "application/json",
             "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-v001.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify("User  enter chat"))
