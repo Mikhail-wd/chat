@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { FooterPanelInput } from "./input"
 import styled from "styled-components"
-import { AppState } from "../../App"
+import { AppState,userTheme} from "../../App"
 
 const MenuWrapper = styled.div`
     &:hover {
@@ -69,7 +69,8 @@ export default function MenuBtn() {
             let userData = {
                 name: "Гость",
                 color: "#fff",
-                fontName: "regular"
+                fontName: "regular",
+                theme: userTheme
             }
             localStorage.setItem("user_settings", JSON.stringify(userData))
             context.dispatch({ type: "set_user", payload: userData })
@@ -82,7 +83,8 @@ export default function MenuBtn() {
             let userData = {
                 name: JSON.parse(storageData).name,
                 color: JSON.parse(storageData).color,
-                fontName: JSON.parse(storageData).fontName
+                fontName: JSON.parse(storageData).fontName,
+                theme : JSON.parse(storageData).theme
             }
             localStorage.setItem("user_settings", JSON.stringify(userData))
         }

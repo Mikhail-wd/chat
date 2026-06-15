@@ -8,6 +8,8 @@ type Action = {
   payload?: any
 }
 
+type userTheme = Array<string>
+
 type Store = {
   selected_users_list: Array<{ user_name: string, user_id: number, expired: number, user_color: string }> | null
   messages: Array<{ name: string, message: string }> | null,
@@ -15,11 +17,13 @@ type Store = {
   usersList: Array<{ user_name: string, user_id: number, expired: number, user_color: string }> | null,
   user_id: number,
   userColor: string,
-  userTheme: Array<string>,
+  userTheme: userTheme,
   activeWindow: null | string,
   userFont: string | null,
   users: boolean
 }
+
+export const userTheme = ["regular", "acid", "mams", "dark"]
 
 const initData: {
   data?: any,
@@ -34,7 +38,7 @@ const initStore: Store = {
   user_name: "Гость",
   usersList: null,
   userFont: "regular",
-  userTheme: ["regular", "acid", "calm"],
+  userTheme: userTheme,
   user_id: Math.ceil(Math.random() * 100000000),
   activeWindow: null,
   users: true
@@ -90,7 +94,13 @@ function reducer(state: Store, action: Action): Store {
       }
       return { ...state, userFont: action.payload }
     case "set_user": {
-      return { ...state, user_name: action.payload.name, userColor: action.payload.color, userFont: action.payload.fontName }
+      return {
+        ...state,
+        user_name: action.payload.name,
+        userColor: action.payload.color,
+        userFont: action.payload.fontName,
+        userTheme: action.payload.theme
+      }
     }
     case "change_name": {
       let tempObject = localStorage.getItem("user_settings")
@@ -102,9 +112,15 @@ function reducer(state: Store, action: Action): Store {
       return { ...state, user_name: action.payload }
     }
     case "change_theme":
+      let tempObjectTheme = localStorage.getItem("user_settings")
       let tempValue = state.userTheme[0]
       let tempArray = [...state.userTheme.slice(1)]
       tempArray.push(tempValue)
+      if (tempObjectTheme !== null) {
+        let parsedObject = JSON.parse(tempObjectTheme)
+        parsedObject.theme = tempArray
+        localStorage.setItem("user_settings", JSON.stringify(parsedObject))
+      }
       return { ...state, userTheme: [...tempArray] }
     default:
       console.log("Error in reducer")
@@ -121,7 +137,7 @@ function App() {
     let tempData = localStorage.getItem("user_settings")
     if (tempData !== null) {
       dispatch({ type: "set_user", payload: JSON.parse(tempData) })
-    }
+    } 
   }, [])
 
   useEffect(() => {

@@ -71,6 +71,18 @@ body {
   --background-alt: #86e27a;
 }
 
+.mams {
+  --background-light: #7a6508;
+  --background: #d3bc56;
+  --background-alt: #b9a132;
+}
+
+.dark {
+  --background-light: #131212;
+  --background: #353534;
+  --background-alt: #777776;
+}
+
 a {
   text-decoration: none;
 }
