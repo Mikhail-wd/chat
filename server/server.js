@@ -70,7 +70,7 @@ const server = Server.createServer((req, res) => {
     const reqMethod = req.method
     const reqImag = req.url.split("/")
     const reqUrl = req.url
-    
+
     if (reqUrl === "/") {
         file.readFile("../dist/index.html", (err, data) => {
             res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
@@ -78,7 +78,7 @@ const server = Server.createServer((req, res) => {
             res.end()
         })
     }
-     else if (reqUrl === "/chat-api/get-messages") {
+    else if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
@@ -95,7 +95,7 @@ const server = Server.createServer((req, res) => {
         res.write(JSON.stringify(messages))
         res.end()
     }
-     else if (reqImag[1] === "assets") {
+    else if (reqImag[1] === "assets") {
         console.log("Assets loading")
         file.readFile(`../dist${req.url}`, (err, data) => {
             if (req.url.endsWith('.html')) {
@@ -178,27 +178,29 @@ const server = Server.createServer((req, res) => {
             }
         })
     }
-     else if (reqUrl === "/chat-api/message") {
+    else if (reqUrl === "/chat-api/message") {
         req.on('data', (data) => {
             EventEmitter.emit("add_message", JSON.parse(data))
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:5173",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify("Message sended"))
         res.end()
     }
     else if (reqUrl === "/chat-api/get-users") {
-        // res.writeHead(200, {
-        //     "Access-Control-Allow-Origin": "http://localhost:5173",
-        //     "Content-Type": "application/json"
-        // });
-        // res.write(JSON.stringify(usersList))
-        // res.end()
+        res.writeHead(200, {
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
+        });
+        res.write(JSON.stringify(usersList))
+        res.end()
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
@@ -213,9 +215,9 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:5173",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify(usersList))
@@ -233,9 +235,9 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:8080",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify("User  enter chat"))
