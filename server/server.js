@@ -72,7 +72,7 @@ const server = Server.createServer((req, res) => {
     const reqUrl = req.url
 
     if (reqUrl === "/") {
-        file.readFile("../dist/index.html", (err, data) => {
+        file.readFile("../dist/vite.svg", (err, data) => {
             res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
             res.write(data)
             res.end()
