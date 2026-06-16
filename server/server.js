@@ -73,7 +73,10 @@ const server = Server.createServer((req, res) => {
 
     if (reqUrl === "/") {
         file.readFile("../dist/index.html", (err, data) => {
-            res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
+            res.writeHead(200, {
+                'Content-Type': 'text/html',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+            })
             res.write(data)
             res.end()
         })
@@ -90,9 +93,9 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify(messages))
@@ -187,9 +190,9 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify("Message sended"))
@@ -217,9 +220,9 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify(usersList))
@@ -237,9 +240,9 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
             "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
         });
         res.write(JSON.stringify("User  enter chat"))
