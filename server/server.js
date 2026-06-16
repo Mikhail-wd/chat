@@ -93,10 +93,10 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
-            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
         res.write(JSON.stringify(messages))
         res.end()
@@ -190,10 +190,10 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
-            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
         res.write(JSON.stringify("Message sended"))
         res.end()
@@ -220,10 +220,10 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
-            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
         res.write(JSON.stringify(usersList))
         res.end()
@@ -240,10 +240,10 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Headers": "https://online-chat-mu-six.vercel.app/",
-            "Access-Control-Allow-Methods": 'OPTIONS,POST,GET'
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
         res.write(JSON.stringify("User  enter chat"))
         res.end()
