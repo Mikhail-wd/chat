@@ -106,7 +106,10 @@ const server = Server.createServer((req, res) => {
         file.readFile(`../dist${req.url}`, (err, data) => {
             if (req.url.endsWith('.html')) {
                 file.readFile("../dist/index.html", (err, data) => {
-                    res.writeHead(200, { 'Content-Type': 'text/html', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })
+                    res.writeHead(200, {
+                        'Content-Type': 'text/html',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                    })
                     res.write(data)
                     res.end()
                 })
