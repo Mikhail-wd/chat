@@ -73,9 +73,12 @@ const server = Server.createServer((req, res) => {
 
     if (reqUrl === "/") {
         file.readFile("../dist/index.html", (err, data) => {
+            console.log("giving clients")
             res.writeHead(200, {
                 'Content-Type': 'text/html',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             })
             res.write(data)
             res.end()
@@ -85,7 +88,7 @@ const server = Server.createServer((req, res) => {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
-            'Access-Control-Allow-Origin': "https://online-chat-mu-six.vercel.app/",
+            'Access-Control-Allow-Origin': "*",
             "Cache-Control": "no-cache",
         });
         EventEmitter.emit("check_message_lenght", messages)
@@ -93,7 +96,7 @@ const server = Server.createServer((req, res) => {
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
@@ -193,7 +196,7 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
@@ -211,8 +214,8 @@ const server = Server.createServer((req, res) => {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
-            'Access-Control-Allow-Origin': "https://online-chat-mu-six.vercel.app/",
-            "Access-Control-Allow-Headers": "*",
+            'Access-Control-Allow-Origin': "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Cache-Control": "no-cache",
         });
         EventEmitter.addListener("add_user", () => res.write(`data:${JSON.stringify(usersList)}\n\n`))
@@ -223,8 +226,8 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
@@ -243,8 +246,8 @@ const server = Server.createServer((req, res) => {
         }
         )
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "https://online-chat-mu-six.vercel.app/",
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
