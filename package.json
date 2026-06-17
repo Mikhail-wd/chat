@@ -3,8 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "server/server.js",
   "scripts": {
     "dev": "vite",
+    "server": "nodemon server/server.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
