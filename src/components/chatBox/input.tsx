@@ -102,8 +102,6 @@ export default function Input() {
                 {
                     headers: {
                         'Content-Type': 'text/json',
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                     }
                 }
             ).then(() => context.dispatch({ type: "delete_all_selected_users" })
@@ -116,8 +114,6 @@ export default function Input() {
                     {
                         headers: {
                             'Content-Type': 'text/json',
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                         }
                     }
                 ).then(() => context.dispatch({ type: "delete_all_selected_users" })
