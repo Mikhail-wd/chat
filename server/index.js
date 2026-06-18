@@ -88,7 +88,7 @@ const server = Server.createServer((req, res) => {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
-            "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app/chat-api/get-messages",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Cache-Control": "no-cache",
         });
@@ -98,7 +98,7 @@ const server = Server.createServer((req, res) => {
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app/chat-api/init-get-messages",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
@@ -197,7 +197,7 @@ const server = Server.createServer((req, res) => {
         )
         res.writeHead(200, {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app/chat-api/message",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
@@ -214,7 +214,7 @@ const server = Server.createServer((req, res) => {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
-            "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app"
+            // "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app"
             // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             // "Cache-Control": "no-cache",
         });
@@ -227,9 +227,9 @@ const server = Server.createServer((req, res) => {
         )
         res.writeHead(200, {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "Origin"
-            // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            // "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
         res.write(JSON.stringify(usersList))
         res.end()
@@ -247,7 +247,7 @@ const server = Server.createServer((req, res) => {
         )
         res.writeHead(200, {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app/chat-api/exit-chat",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         });
