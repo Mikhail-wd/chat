@@ -135,10 +135,11 @@ type User = {
     expired?: string | number,
 }
 
+const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
+const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
+
 
 export default function ChatBox() {
-    const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
-    const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
     const leftCol = useId()
     const rightCol = useId()
     const footer = useId()
