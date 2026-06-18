@@ -143,7 +143,9 @@ function App() {
   useEffect(() => {
     axios.get(import.meta.env.VITE_SERVER + "chat-api/init-get-messages", {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
       }
     }).then(response => {
       dispatch({ type: "resive_messages", payload: response.data })
