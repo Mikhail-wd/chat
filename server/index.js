@@ -71,20 +71,20 @@ const server = Server.createServer((req, res) => {
     const reqImag = req.url.split("/")
     const reqUrl = req.url
 
-    if (reqUrl === "/") {
-        file.readFile("../dist/index.html", (err, data) => {
-            console.log("giving clients")
-            res.writeHead(200, {
-                'Content-Type': 'text/html',
-                "Access-Control-Allow-Origin": "*",
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-            })
-            res.write(data)
-            res.end()
-        })
-    }
-    else if (reqUrl === "/chat-api/get-messages") {
+    // if (reqUrl === "/") {
+    //     file.readFile("../dist/index.html", (err, data) => {
+    //         console.log("giving clients")
+    //         res.writeHead(200, {
+    //             'Content-Type': 'text/html',
+    //             "Access-Control-Allow-Origin": "*",
+    //             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    //             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+    //         })
+    //         res.write(data)
+    //         res.end()
+    //     })
+    // }
+    if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
