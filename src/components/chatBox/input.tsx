@@ -101,7 +101,9 @@ export default function Input() {
                 JSON.stringify({ name: context.data.user_name, message: chatMsg, image_link: null, user_color: context.data.userColor, selected_users: context.data.selected_users_list }),
                 {
                     headers: {
-                        'Content-Type': 'text/json'
+                        'Content-Type': 'text/json',
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                     }
                 }
             ).then(() => context.dispatch({ type: "delete_all_selected_users" })
@@ -113,7 +115,9 @@ export default function Input() {
                     JSON.stringify({ name: context.data.user_name, message: "images", image_link: chatMsg, user_color: context.data.userColor, selected_users: context.data.selected_users_list }),
                     {
                         headers: {
-                            'Content-Type': 'text/json'
+                            'Content-Type': 'text/json',
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                         }
                     }
                 ).then(() => context.dispatch({ type: "delete_all_selected_users" })
@@ -129,7 +133,7 @@ export default function Input() {
                     <EmojiPicker onEmojiClick={(emojiObject) => addingEmoji(emojiObject)} previewConfig={{ showPreview: false }} />
                 </EmojiIcon>
                 <TenerGif />
-                <FooterPanelInputAlter value={chatMsg} onChange={(event) => changeMessage(event)} maxLength={250} ref={focusInput} placeholder={"Message"}/>
+                <FooterPanelInputAlter value={chatMsg} onChange={(event) => changeMessage(event)} maxLength={250} ref={focusInput} placeholder={"Message"} />
             </FormWrapper>
         </Form>
     )

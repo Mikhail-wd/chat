@@ -203,7 +203,13 @@ export default function ChatBox() {
     useEffect(() => {
         let sendInter = setInterval((value = context.data.userColor, name = context.data.user_name) => {
             axios.post(import.meta.env.VITE_SERVER + "chat-api/enter-chat",
-                JSON.stringify({ user_name: name, user_id: context.data.user_id, user_color: value })
+                JSON.stringify({ user_name: name, user_id: context.data.user_id, user_color: value }), {
+                headers: {
+                    'Content-Type': 'text/json',
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                }
+            }
             ).then().catch(() => console.warn("Fail to connect to server"))
         }, 5000)
         sendInter
@@ -215,11 +221,25 @@ export default function ChatBox() {
         let tempData = localStorage.getItem("user_settings")
         if (tempData !== null) {
             axios.post(import.meta.env.VITE_SERVER + "chat-api/enter-chat",
-                JSON.stringify({ user_name: JSON.parse(tempData).name, user_id: context.data.user_id, user_color: JSON.parse(tempData).color })
+                JSON.stringify({ user_name: JSON.parse(tempData).name, user_id: context.data.user_id, user_color: JSON.parse(tempData).color }),
+                {
+                    headers: {
+                        'Content-Type': 'text/json',
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                    }
+                }
             ).then().catch(() => console.warn("Fail to connect to server"))
         } else {
             axios.post(import.meta.env.VITE_SERVER + "chat-api/enter-chat",
-                JSON.stringify({ user_name: context.data.user_name, user_id: context.data.user_id, user_color: context.data.userColor })
+                JSON.stringify({ user_name: context.data.user_name, user_id: context.data.user_id, user_color: context.data.userColor }),
+                {
+                    headers: {
+                        'Content-Type': 'text/json',
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                    }
+                }
             ).then().catch(() => console.warn("Fail to connect to server"))
         }
     }, [])
