@@ -206,7 +206,7 @@ export default function ChatBox() {
                 JSON.stringify({ user_name: name, user_id: context.data.user_id, user_color: value }), {
                 headers: {
                     'Content-Type': 'text/json',
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app",
                     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                 }
             }
@@ -225,7 +225,7 @@ export default function ChatBox() {
                 {
                     headers: {
                         'Content-Type': 'text/json',
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app",
                         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                     }
                 }
@@ -236,7 +236,7 @@ export default function ChatBox() {
                 {
                     headers: {
                         'Content-Type': 'text/json',
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": "https://chat-eta-one-89.vercel.app",
                         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                     }
                 }
