@@ -101,7 +101,8 @@ const server = Server.createServer((req, res) => {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            "Access-Control-Allow-Methods": "*"
+            "Access-Control-Allow-Methods": "*",
+            "Cache-Control": "no-cache",
         });
         res.write(JSON.stringify(messages))
         res.end()
@@ -217,8 +218,8 @@ const server = Server.createServer((req, res) => {
             'Content-Type': 'text/event-stream',
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            "Access-Control-Allow-Methods": "*"
-            // "Cache-Control": "no-cache",
+            "Access-Control-Allow-Methods": "*",
+            "Cache-Control": "no-cache",
         });
         EventEmitter.addListener("add_user", () => res.write(`data:${JSON.stringify(usersList)}\n\n`))
     }
