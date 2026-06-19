@@ -35,7 +35,6 @@ EventEmitter.on("add_message", function (value) {
         })
     }
 })
-
 EventEmitter.on("add_user", function (value) {
     let allId = []
     usersList.map(element => allId.push(element.user_id))
