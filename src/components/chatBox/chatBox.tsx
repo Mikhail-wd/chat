@@ -134,8 +134,6 @@ type User = {
     user_id: string | number,
     expired?: string | number,
 }
-const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
-const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
 
 export default function ChatBox() {
     const leftCol = useId()
@@ -177,19 +175,6 @@ export default function ChatBox() {
     //set sse for messages and users
     useEffect(() => {
         setUserFont(checkFont(context.data.userFont))
-
-        eventGetMessages.onmessage = (event) => {
-            context.dispatch({ type: "resive_messages", payload: JSON.parse(event.data) })
-        }
-        eventGetUsers.onmessage = (event) => {
-            context.dispatch({ type: "resive_users", payload: JSON.parse(event.data) })
-        }
-
-        // return (() => {
-        //     eventGetMessages.close()
-        //     eventGetUsers.close()
-        // })
-
     }, [context.data.userFont])
 
     //set states for messages and users

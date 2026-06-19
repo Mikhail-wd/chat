@@ -128,7 +128,11 @@ function reducer(state: Store, action: Action): Store {
   }
 }
 
+
 export const AppState = createContext(initData)
+
+const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
+const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
 
 function App() {
   const [AppData, dispatch] = useReducer(reducer, initStore)
@@ -137,7 +141,7 @@ function App() {
     let tempData = localStorage.getItem("user_settings")
     if (tempData !== null) {
       dispatch({ type: "set_user", payload: JSON.parse(tempData) })
-    } 
+    }
   }, [])
 
   useEffect(() => {
@@ -148,6 +152,21 @@ function App() {
     }).then(response => {
       dispatch({ type: "resive_messages", payload: response.data })
     }).catch(() => console.warn("Error on getting init messages"))
+
+
+    eventGetMessages.onmessage = (event) => {
+      dispatch({ type: "resive_messages", payload: JSON.parse(event.data) })
+    }
+    eventGetUsers.onmessage = (event) => {
+      dispatch({ type: "resive_users", payload: JSON.parse(event.data) })
+    }
+
+    // return (() => {
+    //     eventGetMessages.close()
+    //     eventGetUsers.close()
+    // })
+
+
   }, [])
   return (
     <AppState.Provider value={{ data: AppData, dispatch: dispatch }}>
