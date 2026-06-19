@@ -186,6 +186,12 @@ export default function ChatBox() {
         eventGetUsers.onmessage = (event) => {
             context.dispatch({ type: "resive_users", payload: JSON.parse(event.data) })
         }
+
+        return (()=>{
+            eventGetMessages.CLOSED
+            eventGetUsers.CLOSED
+        })
+        
     }, [context.data.userFont])
 
     //set states for messages and users
