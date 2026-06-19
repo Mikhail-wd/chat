@@ -88,13 +88,18 @@ const server = Server.createServer((req, res) => {
         res.writeHead(200, {
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            "Access-Control-Allow-Methods": "*",
             "Cache-Control": "no-cache",
         });
         EventEmitter.emit("check_message_lenght", messages)
         EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
+    }
+        else if (reqUrl === "/chat-api/get-users") {
+        res.writeHead(200, {
+            "Connection": "keep-alive",
+            'Content-Type': 'text/event-stream',
+            "Cache-Control": "no-cache"
+        });
+        EventEmitter.addListener("add_user", () => res.write(`data:${JSON.stringify(usersList)}\n\n`))
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
@@ -205,23 +210,6 @@ const server = Server.createServer((req, res) => {
         });
         res.write(JSON.stringify("Message sended"))
         res.end()
-    }
-    else if (reqUrl === "/chat-api/get-users") {
-        // res.writeHead(200, {
-        //     "Access-Control-Allow-Origin": "http://localhost:5173",
-        //     "Content-Type": "application/json"
-        // });
-        // res.write(JSON.stringify(usersList))
-        // res.end()
-        res.writeHead(200, {
-            "Connection": "keep-alive",
-            'Content-Type': 'text/event-stream',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            "Access-Control-Allow-Methods": "*",
-            "Cache-Control": "no-cache",
-        });
-        EventEmitter.addListener("add_user", () => res.write(`data:${JSON.stringify(usersList)}\n\n`))
     }
     else if (reqUrl === "/chat-api/enter-chat") {
         req.on('data', (data) => {

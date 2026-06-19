@@ -175,12 +175,8 @@ export default function ChatBox() {
 
     //set sse for messages and users
     useEffect(() => {
-        const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages", {
-            withCredentials: true,
-        })
-        const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users", {
-            withCredentials: true,
-        })
+        const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
+        const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
 
         setUserFont(checkFont(context.data.userFont))
         
