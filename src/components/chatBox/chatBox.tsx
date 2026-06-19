@@ -185,10 +185,10 @@ export default function ChatBox() {
             context.dispatch({ type: "resive_users", payload: JSON.parse(event.data) })
         }
 
-        return (() => {
-            eventGetMessages.close()
-            eventGetUsers.close()
-        })
+        // return (() => {
+        //     eventGetMessages.close()
+        //     eventGetUsers.close()
+        // })
 
     }, [context.data.userFont])
 
