@@ -86,6 +86,7 @@ const server = Server.createServer((req, res) => {
     if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
             "Access-Control-Allow-Origin": "*",
+            "X-Accel-Buffering": "no",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "*",
             "Connection": "keep-alive",
@@ -98,6 +99,7 @@ const server = Server.createServer((req, res) => {
     else if (reqUrl === "/chat-api/get-users") {
         res.writeHead(200, {
             "Access-Control-Allow-Origin": "*",
+            "X-Accel-Buffering": "no",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
             "Access-Control-Allow-Methods": "*",
             "Connection": "keep-alive",

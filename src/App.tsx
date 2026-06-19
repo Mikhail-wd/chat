@@ -131,9 +131,6 @@ function reducer(state: Store, action: Action): Store {
 
 export const AppState = createContext(initData)
 
-const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
-const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
-
 function App() {
   const [AppData, dispatch] = useReducer(reducer, initStore)
 
@@ -145,6 +142,10 @@ function App() {
   }, [])
 
   useEffect(() => {
+
+    const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
+    const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
+
     axios.get(import.meta.env.VITE_SERVER + "chat-api/init-get-messages", {
       headers: {
         'Content-Type': 'application/json',
