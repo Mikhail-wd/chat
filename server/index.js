@@ -94,7 +94,7 @@ const server = Server.createServer((req, res) => {
             "Cache-Control": "no-cache",
         });
         EventEmitter.emit("check_message_lenght", messages)
-        EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n retry:5000\n`))
+        EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
     }
     else if (reqUrl === "/chat-api/get-users") {
         res.writeHead(200, {
@@ -105,7 +105,7 @@ const server = Server.createServer((req, res) => {
             'Content-Type': 'text/event-stream',
             "Cache-Control": "no-cache"
         });
-        EventEmitter.addListener("add_user", () => res.write(`data:${JSON.stringify(usersList)}\n retry:5000\n`))
+        EventEmitter.addListener("add_user", () => res.write(`data:${JSON.stringify(usersList)}\n\n`))
     }
     else if (reqUrl === "/chat-api/init-get-messages") {
         res.writeHead(200, {
