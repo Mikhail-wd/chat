@@ -134,6 +134,8 @@ type User = {
     user_id: string | number,
     expired?: string | number,
 }
+const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
+const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
 
 export default function ChatBox() {
     const leftCol = useId()
@@ -171,11 +173,9 @@ export default function ChatBox() {
     useEffect(() => {
         setUserTheme(context.data.userTheme)
     }, [context.data.userTheme])
-    
+
     //set sse for messages and users
     useEffect(() => {
-        const eventGetMessages = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-messages")
-        const eventGetUsers = new EventSource(import.meta.env.VITE_SERVER + "chat-api/get-users")
         setUserFont(checkFont(context.data.userFont))
 
         eventGetMessages.onmessage = (event) => {
