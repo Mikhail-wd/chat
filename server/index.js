@@ -86,6 +86,9 @@ const server = Server.createServer((req, res) => {
     // }
     if (reqUrl === "/chat-api/get-messages") {
         res.writeHead(200, {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "*",
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
             "Cache-Control": "no-cache",
@@ -93,8 +96,11 @@ const server = Server.createServer((req, res) => {
         EventEmitter.emit("check_message_lenght", messages)
         EventEmitter.addListener("add_message", () => res.write(`data:${JSON.stringify(messages)}\n\n`))
     }
-        else if (reqUrl === "/chat-api/get-users") {
+    else if (reqUrl === "/chat-api/get-users") {
         res.writeHead(200, {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+            "Access-Control-Allow-Methods": "*",
             "Connection": "keep-alive",
             'Content-Type': 'text/event-stream',
             "Cache-Control": "no-cache"
